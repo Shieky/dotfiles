@@ -2,7 +2,7 @@
 
 ### needed packages
 
-`eww dunst gtk/2/3/4 hypr kitty nvim rofi spicetify swww waybar qt5c and zsh`
+`eww dunst gtk/2/3/4 kitty nvim rofi spicetify swww waybar qt5c and zsh`
 
 For waybar you probably want `brightnessctl` and `cava`, media detection is by `mpris`
 The fonts used are `Nerd Fonts` and / - `Fira Code` for editor stuff
