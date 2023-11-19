@@ -1,0 +1,257 @@
+{
+    "layer": "top",
+    "margin-bottom": -10,
+    "margin-top": 10,
+    "modules-left": [
+        "custom/launcher",
+        "cpu",
+        "memory",
+        "hyprland/window"
+    ],
+    "modules-center": [
+        "hyprland/workspaces"
+    ],
+    "modules-right": [
+        "tray",
+        "group/media",
+        "group/brightness",
+        "clock",
+        "custom/power",
+    ],
+    "group/brightness": {
+        "orientation": "inherit",
+        "drawer": {
+            "transition-duration": 500,
+            "children-class": "brighthness-group",
+            "transition-left-to-right": false,
+        },
+        "modules": [
+            "backlight",
+            "backlight/slider"
+        ]
+    },
+    "group/media": {
+        "orientation": "inherit",
+        "modules": [
+            "mpris",
+            "cava",
+            "pulseaudio"
+        ]
+    },
+    "cava": {
+        "framerate": 75,
+        "autosens": 1,
+        "sensitivity": 2,
+        "bars": 30,
+        "lower_cutoff_freq": 50,
+        "higher_cutoff_freq": 10000,
+        "method": "pulse",
+        "source": "auto",
+        "stereo": true,
+        "reverse": false,
+        "bar_delimiter": 0,
+        "monstercat": false,
+        "waves": false,
+        "noise_reduction": 0.60,
+        "input_delay": 1,
+        "format-icons": [
+            "▁",
+            "▂",
+            "▃",
+            "▄",
+            "▅",
+            "▆",
+            "▇",
+            "█"
+        ],
+        "actions": {
+            "on-click-right": "mode"
+        }
+    },
+    "pulseaudio": {
+        "format": "{icon} {volume}",
+        "format-bluetooth": "{icon}  {volume}%",
+        "format-bluetooth-muted": "󰝟 {icon}",
+        "format-muted": "婢 {volume}",
+        "tooltip-format": "{icon} {desc} // {volume}%",
+        "scroll-step": 5,
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": [
+                "",
+                "",
+                ""
+            ]
+        },
+        "on-click": "pavucontrol"
+    },
+    "network": {
+        "format-wifi": "",
+        "format-ethernet": "",
+        "tooltip-format": "{essid} ({signalStrength}%)",
+        "format-linked": "{ifname} (No IP) ",
+        "format-disconnected": "⚠",
+        "format-alt": "{ifname}: {ipaddr}/{cidr}"
+    },
+    "backlight": {
+        "format": "{icon} {percent}%",
+        "interval": 2,
+        "format-icons": [
+            "󰹇",
+            "󰃜",
+            "󰃛",
+            "󰃝",
+            "󰃟",
+            "󰃠"
+        ],
+        "states": {
+            "normal": 0,
+            "warning": 80,
+            "critical": 90
+        },
+        "on-click": "hyprshade toggle bluefilter",
+        "on-click-right": "hyprshade toggle extradark",
+        "on-scroll-down": "brightnessctl -q set 5%-",
+        "on-scroll-up": "brightnessctl -q set 5%+",
+        "tooltip": false
+    },
+    "mpris": {
+        "format": "{player_icon} {artist} - {title} ({position})",
+        "format-paused": "{status_icon} <i>{dynamic}</i>",
+        "interval": 1,
+        "player-icons": {
+            "default": "▶",
+            "mpv": "🎵",
+            "spotify": ""
+        },
+        "status-icons": {
+            "paused": "⏸"
+        }
+    },
+    "backlight/slider": {
+        "min": 0,
+        "max": 100,
+        "orientation": "horizontal",
+        "device": ""
+    },
+    "tray": {
+        "icon-size": 18,
+        "spacing": 10
+    },
+    "clock": {
+        "format": " {:%H:%M   %d/%m/%Y}"
+    },
+    "cpu": {
+        "interval": 15,
+        "format": " {}%",
+        "max-length": 10
+    },
+    "memory": {
+        "interval": 30,
+        "format": " {}%",
+        "max-length": 10
+    },
+    "custom/spotify": {
+        "interval": 1,
+        "return-type": "json",
+        "exec": "~/.config/waybar/scripts/spotify.sh",
+        "exec-if": "pgrep spotify",
+        "escape": true
+    },
+    "custom/media": {
+        "format": "{icon} {}",
+        "escape": true,
+        "return-type": "json",
+        "max-length": 40,
+        "on-click": "playerctl play-pause",
+        "on-click-right": "playerctl stop",
+        "smooth-scrolling-threshold": 2,
+        "on-scroll-up": "playerctl next",
+        "on-scroll-down": "playerctl previous",
+        "exec": "~/.config/waybar/scripts/mediaplayer.py 2> /dev/null"
+    },
+    "custom/launcher": {
+        "format": "  ",
+        "tooltip": true,
+        "exec": "echo '{\"text\":\"💧\",\"tooltip\":\"Drun | Run\"}'",
+        "return-type": "json",
+        "on-click": "~/.config/hypr/scripts/rofilaunch.sh d",
+        "on-click-right": "~/.config/hypr/scripts/rofilaunch.sh w"
+    },
+    "custom/power": {
+        "format": "{}",
+        "exec": "echo '{\"text\":\"⏻\",\"tooltip\":\"Power\"}'",
+        "return-type": "json",
+        "on-click": "eww open powermenu"
+    },
+    "hyprland/workspaces": {
+        "on-click": "activate",
+        "format": "{icon} {windows}",
+        "window-rewrite-default": "",
+        "format-window-separator": " ",
+        "window-rewrite": {
+            "firefox": "",
+            "kitty": "",
+            "code": "󰨞",
+            "kate": "",
+            "spotify": "",
+            "discord": "󰙯",
+            "mailspring": "",
+            "dolphin": "",
+            "steam": "󰓓",
+            "(.*)Visual Studio Code": "Code 󰨞",
+            "(.*)Dolphin": "󰉋",
+            "(.*)Spotify": "Spotify 󰓇",
+            "(.*)Steam": "Steam 󰓓"
+        },
+        "format-icons": {
+            "default": "",
+            "1": "1",
+            "2": "2",
+            "3": "3",
+            "4": "4",
+            "5": "Spotify / Discord",
+            "6": "6",
+            "7": "7",
+            "8": "8",
+            "9": "9",
+            "urgent": "󱓻"
+        },
+        "persistent-workspaces": {
+            "1": [],
+            "2": [],
+            "3": [],
+            "4": [],
+            "5": []
+        }
+    },
+    "hyprland/window": {
+        "format": "👉 {title}",
+        "rewrite": {
+            "(.*) — Mozilla Firefox": "🌎 $1",
+            "(.*) - kitty": "> [$1]"
+        },
+        "separate-outputs": true
+    },
+    "custom/notifications": {
+        "tooltip": false,
+        "format": "{icon}",
+        "format-icons": {
+            "notification": " <span foreground='red'><sup></sup></span>",
+            "none": "",
+            "dnd-notification": "<span foreground='red'><sup></sup></span>",
+            "dnd-none": ""
+        },
+        "return-type": "json",
+        "exec-if": "which swaync-client",
+        "exec": "swaync-client -swb",
+        "on-click": "swaync-client -t -sw",
+        "on-click-right": "swaync-client -d -sw",
+        "escape": true
+    },
+}
